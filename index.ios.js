@@ -7,6 +7,7 @@ var {
   Text,
   View,
   TextInput,
+  TouchableHighlight,
   Image
 } = React;
 
@@ -66,24 +67,27 @@ var hellopro = React.createClass({
     }
     return (
       <View style={styles.container}>
-        <Image source={require('image!kids')}
-               resizeMode='cover'
-               style={styles.backdrop}>
-          <View style={styles.overlay}>
-           <View style={styles.row}>
-             <Text style={styles.mainText}>
-               Current weather for 
-             </Text>
-             <View style={styles.zipContainer}>
-               <TextInput
-                 style={[styles.zipCode, styles.mainText]}
-                 returnKeyType='go'
-                 onSubmitEditing={this._handleTextChange}/>
-             </View>
+        <View style={styles.overlay}>
+         <View style={styles.row}>
+           <Text style={styles.mainText}>
+             Current weather for 
+           </Text>
+           <View style={styles.zipContainer}>
+             <TextInput
+               style={[styles.zipCode, styles.mainText]}
+               returnKeyType='go'
+               onSubmitEditing={this._handleTextChange}/>
            </View>
-           {content}
          </View>
-        </Image>
+         {content}
+       </View>
+       <TouchableHighlight onPressIn={this._onPressIn} onPressOut={this._onPressOut} style={styles.btnPrimary}>
+         <View style={styles.button}>
+           <Text style={styles.welcome}>
+            {this.state.pressing ? 'EEK!' : 'PUSH ME'}
+           </Text>
+         </View>
+       </TouchableHighlight>
       </View>
     );
   }
@@ -141,7 +145,11 @@ var styles = StyleSheet.create({
   },
   placeHolder: {
     flex: 1
-  }
+  },
+  btnPrimary: {
+    backgroundColor: 'red',
+    margin: 10
+  },
 });
 
 AppRegistry.registerComponent('hellopro', () => hellopro);
